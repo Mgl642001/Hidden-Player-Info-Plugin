@@ -1,2 +1,2 @@
-# HiddenInfo MCPE server plugin
-See a players hidden info like a MCPE phishing plugin.
+# HiddenInfoPE 
+This plugin allows you to get user-data (information) about User IPs, Ports, ClientIDs and UniqueUserIDs.
