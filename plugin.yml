@@ -3,7 +3,7 @@ name: HiddenInfo
 author: ArceusMatt
 authors: ArceusMatt, kpwn_
 descrption: Plugin that shows players hidden info.
-version: 1.0.1indev
+version: 1.0.2indev
 api: [2.0.0]
 main: HiddenInfo\Main
 
