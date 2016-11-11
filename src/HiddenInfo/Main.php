@@ -28,19 +28,21 @@ use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
+use pocketmine\command\CommandExecutor;
 class Main extends PluginBase implements Listener{
     public function onEnable(){
 	$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	$this->saveDefaultConfig();
 	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "======================");	
-	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . TextFormat::BLUE . "   HiddenInfo v1.0  ");
+	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . TextFormat::BLUE . "   HiddenInfo v2.0  ");
 	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "by Arceus&kpwn_");
 	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "======================");
 		$this->getLogger()->info(TextFormat::GREEN . TextFormat::BOLD . "HiddenInfo > Plugin handlers & libraries has been started. Enabling plugin...");
     }
     public function onDisable(){
 		$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "======================");	
-	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . TextFormat::BLUE . "   HiddenInfo v1.0  ");
+	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . TextFormat::BLUE . "   HiddenInfo v2.0  ");
 	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "by Arceus&kpwn_");
 	$this->getLogger()->info(TextFormat::RED . TextFormat::BOLD . "======================");
 		$this->getLogger()->info(TextFormat::GREEN . TextFormat::BOLD . "HiddenInfo > Kill signal requested. Disabling plugin...");
@@ -52,6 +54,17 @@ class Main extends PluginBase implements Listener{
 			return "§l§8[§9H§r§9idden§l§9I§r§9nfo§l§8]§r " . TextFormat::WHITE . "$string";
 		}
 	}
+	public function onPlayerCommand(PlayerCommandPreprocessEvent $event){
+	$name = $event->getPlayer()->getDisplayName();
+	$command = $event->getMessage();
+	if($command[0] == '/' or $command[0] == './'){
+	foreach($this->getServer()->getOnlinePlayers() as $p) {
+		if($p->hasPermission("hiddeninf.cmd")){
+			$p->sendMessage("§l§8[§9H§r§9idden§l§9I§r§9nfo§l§8]§r " . $name . ": " . $command);
+			}
+			}
+			}
+}
   public function onCommand(CommandSender $sender, Command $command, $label, array $args){
         switch(strtolower($command->getName())){
             case "hiddeninfo":
