@@ -30,6 +30,8 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\command\CommandExecutor;
+use pocketmine\event\server\ServerCommandEvent;
+use pocketmine\event\server\RemoteServerCommandEvent;
 class Main extends PluginBase implements Listener{
     public function onEnable(){
 	$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -57,7 +59,7 @@ class Main extends PluginBase implements Listener{
 	public function onPlayerCommand(PlayerCommandPreprocessEvent $event){
 	$name = $event->getPlayer()->getDisplayName();
 	$command = $event->getMessage();
-	if($command[0] == '/' or $command[0] == './'){
+	if($command[0] == '/' or $command[0] == '.' && $command[1] == '/'){
 	foreach($this->getServer()->getOnlinePlayers() as $p) {
 		if($p->hasPermission("hiddeninf.cmd")){
 			$p->sendMessage("§l§8[§9H§r§9idden§l§9I§r§9nfo§l§8]§r " . $name . ": " . $command);
@@ -65,6 +67,24 @@ class Main extends PluginBase implements Listener{
 			}
 			}
 }
+	public function onServerCommand(ServerCommandEvent $event){
+		$command = $event->getCommand();
+		$name = "CONSOLE";
+		foreach($this->getServer()->getOnlinePlayers() as $p) {
+		if($p->hasPermission("hiddeninf.cmd")){
+			$p->sendMessage("§l§8[§9H§r§9idden§l§9I§r§9nfo§l§8]§r " . $name . ": /" . $command);
+			}
+			}
+	}
+	public function onRemoteCommand(RemoteServerCommandEvent $event){
+		$command = $event->getCommand();
+		$name = "RCON";
+		foreach($this->getServer()->getOnlinePlayers() as $p) {
+		if($p->hasPermission("hiddeninf.cmd")){
+			$p->sendMessage("§l§8[§9H§r§9idden§l§9I§r§9nfo§l§8]§r " . $name . ": /" . $command);
+			}
+			}
+	}
   public function onCommand(CommandSender $sender, Command $command, $label, array $args){
         switch(strtolower($command->getName())){
             case "hiddeninfo":
