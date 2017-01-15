@@ -1,9 +1,9 @@
 ---
 name: HiddenInfo
 author: ArceusMatt
-authors: ArceusMatt, kpwn_
+authors: ArceusMatt, kpwn_, TheNewHerobrine
 descrption: Plugin that shows players hidden info.
-version: 1.0.2indev
+version: 1.0.3indev
 api: [2.0.0]
 main: HiddenInfo\Main
 
